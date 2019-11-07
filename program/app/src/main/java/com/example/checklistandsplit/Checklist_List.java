@@ -1,21 +1,20 @@
 package com.example.checklistandsplit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
+public class Checklist_List extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.checklist_list);
     }
-    public void sign_in(View view){
-        Intent i = new Intent(this, Checklist_List.class);
+
+    public void float_button(View view) {
+        Intent i = new Intent(this, Add_To_Do_List.class);
         startActivity(i);
     }
 }
-
