@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Checklist_List"></activity>
+        <activity android:name=".Add_To_Do_List"></activity>
     </application>
 
 </manifest>
