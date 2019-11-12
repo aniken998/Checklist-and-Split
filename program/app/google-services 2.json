@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "270080688695",
+    "firebase_url": "https://checklist-and-split.firebaseio.com",
+    "project_id": "checklist-and-split",
+    "storage_bucket": "checklist-and-split.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270080688695:android:f9eaf159c6d89b795035b2",
+        "android_client_info": {
+          "package_name": "com.example.checklistandsplit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270080688695-alba791n0hhkd08olh13ilpplgvacf1u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.checklistandsplit",
+            "certificate_hash": "6f96d7eb9383057d55c1b6da522cbe633d3389e4"
+          }
+        },
+        {
+          "client_id": "270080688695-dcg19ad9nop7cntjai6g4k9t696vlu41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOFkMiYlIXI0AqoOqXb0yolkwIZvgqVJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270080688695-dcg19ad9nop7cntjai6g4k9t696vlu41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
