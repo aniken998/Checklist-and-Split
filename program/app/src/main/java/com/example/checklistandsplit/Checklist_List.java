@@ -36,6 +36,8 @@ public class Checklist_List extends AppCompatActivity {
         Custom_BigList adapter = new Custom_BigList(this,R.layout.custom_big_list, bigLists);
         listView.setAdapter(adapter);
 
+
+
     }
 
     public void float_button(View view) {
