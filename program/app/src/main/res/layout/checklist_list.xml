@@ -6,25 +6,98 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Checklist_List">
+    tools:context=".Checklist_List">>
+
+    <ListView
+        android:id="@+id/checklist_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/add_job"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:cardCornerRadius="20dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/todo"
+            android:layout_width="210dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="40dp"
+            android:ems="10"
+            android:hint="To-do"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="210dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="451dp"
+            android:ems="10"
+            android:inputType="date"
+            android:hint="date:MM/DD/YYYY"/>
+
+        <EditText
+            android:id="@+id/time"
+            android:layout_width="210dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="343dp"
+            android:ems="10"
+            android:inputType="time"
+            android:hint="time"/>
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="Back"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="310dp"
+            android:layout_marginEnd="50dp"
+            android:onClick="back"
+            android:layout_marginBottom="275dp"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="310dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="275dp"
+            android:onClick="save"
+            android:text="Save" />
+
+    </androidx.cardview.widget.CardView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:onClick="float_button"
-        android:layout_alignBottom="@+id/checklist_list1"
-        android:layout_alignRight="@+id/checklist_list1"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/checklist_list"
+        android:layout_alignRight="@+id/checklist_list"
+        app:srcCompat="@android:drawable/ic_input_add"/>
 
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <ListView
-        android:id="@+id/checklist_list1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
 
 
 </RelativeLayout>

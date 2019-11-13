@@ -26,22 +26,22 @@ public class Custom_BigList extends ArrayAdapter<BigList> {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(resource,null,false);
+        String title = getItem(position).getTitle();
+        String date = getItem(position).getDate();
+        String time = getItem(position).getTime();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        convertView = inflater.inflate(resource, parent, false);
 
-        TextView title = view.findViewById(R.id.biglist_title);
-        TextView date = view.findViewById(R.id.biglist_date);
-        TextView time = view.findViewById(R.id.biglist_time);
-        ImageView isCheck = view.findViewById(R.id.biglist_check);
-        ImageButton delete = view.findViewById(R.id.biglist_delete);
+        TextView tvTitle = convertView.findViewById(R.id.biglist_title);
+        TextView tvDate = convertView.findViewById(R.id.biglist_date);
+        TextView tvTime = convertView.findViewById(R.id.biglist_time);
+        ImageView isCheck = convertView.findViewById(R.id.biglist_check);
+        ImageButton delete = convertView.findViewById(R.id.biglist_delete);
 
-        BigList list = bigLists.get(position);
+        tvTitle.setText(title);
+        tvDate.setText(date);
+        tvTime.setText(time);
 
-        title.setText(list.getTitle());
-        date.setText(list.getDate());
-        time.setText(list.getTime());
-
-
-        return view;
+        return convertView;
     }
 }

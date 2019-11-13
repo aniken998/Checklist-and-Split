@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
-                android:onClick="sign_in"
+                android:onClick="sign_up"
                 android:text="join" />
         </LinearLayout>
 
