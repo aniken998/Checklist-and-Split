@@ -1,7 +1,7 @@
 package com.example.checklistandsplit;
 
 public class BigList  {
-    String title, date, time;
+     private String title, date, time;
     //int check;
 
     public BigList(String title, String date, String time) {
@@ -26,4 +26,6 @@ public class BigList  {
     public String getTime() {
         return time;
     }
+
+
 }
