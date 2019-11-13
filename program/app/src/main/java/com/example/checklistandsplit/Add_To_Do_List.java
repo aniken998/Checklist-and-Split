@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Add_To_Do_List extends AppCompatActivity {
+    Mydb database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,12 +20,13 @@ public class Add_To_Do_List extends AppCompatActivity {
     }
 
     public void save(View view) {
-        SharedPreferences sp = this.getSharedPreferences("title", Context.MODE_PRIVATE);
-        String title = sp.getString("titles", "");
+        //SharedPreferences sp = this.getSharedPreferences("title", Context.MODE_PRIVATE);
+        //String title = sp.getString("titles", "");
         EditText todo = findViewById(R.id.todo);
         EditText date = findViewById(R.id.date);
         EditText time = findViewById(R.id.time);
-        if(title.equals("")) {
+        database = new Mydb(this,"big_list_table", null, 1);
+        /*if(title.equals("")) {
             title = title + todo.getText().toString() + "`" + date.getText().toString() + "`" + time.getText().toString();
             Log.d("D", title);
             sp.edit().clear().commit();
@@ -36,9 +38,11 @@ public class Add_To_Do_List extends AppCompatActivity {
             sp.edit().clear().commit();
             sp.edit().putString("titles",title).apply();
             this.finish();
-        }
-        //Intent i = new Intent(this,Checklist_List.class);
-        //startActivity(i);
+        }*/
 
+        database.insert(todo.getText().toString(), date.getText().toString(), time.getText().toString());
+        database.count();
+        Intent i = new Intent(this,Checklist_List.class);
+        startActivity(i);
     }
 }
