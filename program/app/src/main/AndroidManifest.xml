@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Checklist_List"></activity>
+        <activity android:name=".SignupActivity"></activity>
     </application>
 
 </manifest>
