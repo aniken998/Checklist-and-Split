@@ -46,7 +46,7 @@ public class Mydb extends SQLiteOpenHelper {
         cv.put("TIME", time);
         db = getWritableDatabase();
         db.insert(TABLE_NAME, null, cv);
-        //Toast.makeText(ctx, "Added " + title + " " + date + " " + time, Toast.LENGTH_LONG).show();
+        Toast.makeText(ctx, "Added " + title + " " + date + " " + time, Toast.LENGTH_LONG).show();
     }
 
     public void delete(String title, String date) {

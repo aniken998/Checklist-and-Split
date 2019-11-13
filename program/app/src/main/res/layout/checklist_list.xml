@@ -8,15 +8,10 @@
     android:orientation="vertical"
     tools:context=".Checklist_List">>
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/checklist_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 
     <androidx.cardview.widget.CardView
@@ -25,13 +20,9 @@
         android:layout_height="400dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497"
         android:visibility="gone"
         tools:visibility="visible">
 
@@ -57,7 +48,7 @@
             android:layout_marginBottom="451dp"
             android:ems="10"
             android:inputType="date"
-            android:hint="date"/>
+            android:hint="date:MM/DD/YYYY"/>
 
         <EditText
             android:id="@+id/time"
@@ -79,6 +70,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="310dp"
             android:layout_marginEnd="50dp"
+            android:onClick="back"
             android:layout_marginBottom="275dp"/>
 
         <Button
@@ -105,18 +97,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:visibility="visible"/>
-        android:layout_alignBottom="@+id/checklist_list1"
-        android:layout_alignRight="@+id/checklist_list1"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-
-    <ListView
-        android:id="@+id/checklist_list1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/checklist_list"
+        android:layout_alignRight="@+id/checklist_list"
+        app:srcCompat="@android:drawable/ic_input_add"/>
 
 </RelativeLayout>
