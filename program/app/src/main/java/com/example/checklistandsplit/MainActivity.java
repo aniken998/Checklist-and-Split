@@ -17,5 +17,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, Checklist_List.class);
         startActivity(i);
     }
+
+    public void sign_up(View view) {
+        Intent i = new Intent(this,SignupActivity.class);
+        startActivity(i);
+    }
+
 }
 
