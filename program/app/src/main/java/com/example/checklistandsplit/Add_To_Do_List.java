@@ -25,7 +25,7 @@ public class Add_To_Do_List extends AppCompatActivity {
         EditText todo = findViewById(R.id.todo);
         EditText date = findViewById(R.id.date);
         EditText time = findViewById(R.id.time);
-        database = new Mydb(this,"big_list_table", null, 1);
+        database = new Mydb(this,"big_list", null, 1);
         /*if(title.equals("")) {
             title = title + todo.getText().toString() + "`" + date.getText().toString() + "`" + time.getText().toString();
             Log.d("D", title);
