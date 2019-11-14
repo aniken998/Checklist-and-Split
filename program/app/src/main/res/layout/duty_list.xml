@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Checklist_List">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/duty_floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="duty_float_button"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/duty_list"
+        android:layout_alignRight="@+id/duty_list"
+        app:srcCompat="@android:drawable/ic_input_add"/>
 
     <ListView
-        android:id="@+id/checklist_list"
+        android:id="@+id/duty_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
-
-
+        android:layout_height="match_parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/add_job"
+        android:id="@+id/add_duty"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:layout_marginStart="50dp"
@@ -28,7 +35,7 @@
         tools:visibility="visible">
 
         <EditText
-            android:id="@+id/todo"
+            android:id="@+id/new_duty_list_title"
             android:layout_width="210dp"
             android:layout_height="45dp"
             android:layout_marginStart="45dp"
@@ -36,11 +43,11 @@
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="40dp"
             android:ems="10"
-            android:hint="To-do"
+            android:hint="Title"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/date"
+            android:id="@+id/new_duty_list_executor"
             android:layout_width="210dp"
             android:layout_height="45dp"
             android:layout_marginStart="45dp"
@@ -48,57 +55,32 @@
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="451dp"
             android:ems="10"
-            android:inputType="date"
-            android:hint="date:MM/DD/YYYY"/>
-
-        <EditText
-            android:id="@+id/time"
-            android:layout_width="210dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="220dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="343dp"
-            android:ems="10"
-            android:inputType="time"
-            android:hint="time"/>
+            android:inputType="textPersonName"
+            android:hint="Who"/>
 
         <Button
-            android:id="@+id/done"
+            android:id="@+id/new_duty_list_done"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:text="Back"
             android:layout_marginStart="50dp"
             android:layout_marginTop="310dp"
             android:layout_marginEnd="50dp"
-            android:onClick="back"
+            android:onClick="duty_back"
             android:layout_marginBottom="275dp"/>
 
         <Button
-            android:id="@+id/save_button"
+            android:id="@+id/new_duty_list_save_button"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="310dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="275dp"
-            android:onClick="save"
+            android:onClick="duty_save"
             android:text="Save" />
 
     </androidx.cardview.widget.CardView>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="float_button"
-        android:visibility="visible"
-        android:layout_alignBottom="@+id/checklist_list"
-        android:layout_alignRight="@+id/checklist_list"
-        app:srcCompat="@android:drawable/ic_input_add"/>
-
 
 
 </RelativeLayout>

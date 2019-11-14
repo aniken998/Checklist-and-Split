@@ -36,8 +36,10 @@ public class Custom_BigList extends ArrayAdapter<BigList> {
         TextView tvDate = convertView.findViewById(R.id.biglist_date);
         TextView tvTime = convertView.findViewById(R.id.biglist_time);
         ImageView isCheck = convertView.findViewById(R.id.biglist_check);
-        ImageButton delete = convertView.findViewById(R.id.biglist_delete);
-
+        //ImageButton delete = convertView.findViewById(R.id.biglist_delete);
+        tvDate.setTextIsSelectable(false);
+        tvTime.setTextIsSelectable(false);
+        tvTitle.setTextIsSelectable(false);
         tvTitle.setText(title);
         tvDate.setText(date);
         tvTime.setText(time);

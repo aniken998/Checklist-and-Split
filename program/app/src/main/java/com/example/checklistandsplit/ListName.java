@@ -31,6 +31,6 @@ public class ListName {
     }
 
     public boolean getCheck() {
-        return  isCheck;
+        return isCheck;
     }
 }
