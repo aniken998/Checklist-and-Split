@@ -52,7 +52,7 @@ public class Checklist_List extends AppCompatActivity {
                 k.putInt("position", position);
                 i.putExtras(k);
                 duty_database = new Mydb(getApplicationContext(), duty_base_name, null, 1);
-                Toast.makeText(getApplicationContext(), "onitem" + position, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "onitem " + position + " table_name " + duty_base_name, Toast.LENGTH_LONG).show();
                 startActivity(i);
 
 
