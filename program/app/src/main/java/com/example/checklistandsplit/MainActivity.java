@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static android.text.TextUtils.isEmpty;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     public void sign_in(View view){
         EditText email = (EditText) findViewById(R.id.user_name);
         EditText password = (EditText) findViewById(R.id.password);
+        if(isEmpty(email.getText().toString()) || isEmpty(password.getText().toString())) {
+            Toast.makeText(this, "Please Enter Email or Password", Toast.LENGTH_LONG).show();
+            return;
+        }
         mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
