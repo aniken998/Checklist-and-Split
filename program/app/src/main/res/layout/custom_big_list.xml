@@ -5,46 +5,61 @@
     android:layout_width="match_parent"
     android:focusable="false"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/cardview_light_background">
 
-    <ImageView
+    <CheckBox
         android:id="@+id/biglist_check"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_weight="10"
+        android:clickable="false"
         android:focusable="false"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        android:layout_gravity="center"/>
+
+
 
     <TextView
         android:id="@+id/biglist_title"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_weight="30"
+        android:layout_width="105dp"
         android:textIsSelectable="false"
-        android:text="TextView" />
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textSize="20dp"/>
 
     <TextView
-        android:id="@+id/biglist_date"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_weight="30"
         android:textIsSelectable="false"
-        android:text="TextView" />
+        android:id="@+id/biglist_date"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/biglist_time"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
         android:layout_weight="30"
         android:textIsSelectable="false"
-        android:text="TextView" />
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textSize="20dp"/>
 
     <ImageButton
         android:id="@+id/biglist_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_weight="5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="10"
+        android:layout_gravity="center"
         android:focusable="false"
+        android:focusableInTouchMode="true"
         app:srcCompat="@android:drawable/ic_delete" />
 
 </LinearLayout>

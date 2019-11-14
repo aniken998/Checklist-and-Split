@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,11 +36,9 @@ public class Custom_BigList extends ArrayAdapter<BigList> {
         TextView tvTitle = convertView.findViewById(R.id.biglist_title);
         TextView tvDate = convertView.findViewById(R.id.biglist_date);
         TextView tvTime = convertView.findViewById(R.id.biglist_time);
-        ImageView isCheck = convertView.findViewById(R.id.biglist_check);
-        //ImageButton delete = convertView.findViewById(R.id.biglist_delete);
-        tvDate.setTextIsSelectable(false);
-        tvTime.setTextIsSelectable(false);
-        tvTitle.setTextIsSelectable(false);
+        CheckBox isCheck = convertView.findViewById(R.id.biglist_check);
+        ImageButton delete = convertView.findViewById(R.id.biglist_delete);
+
         tvTitle.setText(title);
         tvDate.setText(date);
         tvTime.setText(time);
