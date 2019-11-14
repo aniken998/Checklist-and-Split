@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Checklist_List">
+    tools:context=".Checklist_List"
+    android:background="@color/cardview_dark_background">
 
     <ListView
         android:id="@+id/checklist_list"
@@ -94,6 +95,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:onClick="float_button"
+
         android:visibility="visible"
         android:layout_alignBottom="@+id/checklist_list"
         android:layout_alignRight="@+id/checklist_list"

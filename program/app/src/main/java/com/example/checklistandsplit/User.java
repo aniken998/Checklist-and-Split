@@ -1,17 +1,17 @@
 package com.example.checklistandsplit;
 
-public class user {
+public class User {
     private String email;
 
-    public user(String email) {
+    public User(String email) {
         this.email = email;
     }
 
-    public String getEmail(String email) {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail() {
+    public void setEmail(String email) {
         this.email = email;
     }
 }

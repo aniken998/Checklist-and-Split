@@ -1,5 +1,7 @@
 package com.example.checklistandsplit;
 
+import java.util.ArrayList;
+
 public class BigList  {
      private String title, date, time;
     //int check;

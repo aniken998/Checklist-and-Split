@@ -59,6 +59,8 @@ public class Checklist_List extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void float_button(View view) {
