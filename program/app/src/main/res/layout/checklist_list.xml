@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Checklist_List">>
+    tools:context=".Checklist_List"
+    android:background="@color/cardview_dark_background">
 
     <ListView
         android:id="@+id/checklist_list"
