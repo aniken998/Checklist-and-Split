@@ -1,7 +1,9 @@
 package com.example.checklistandsplit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,8 +27,12 @@ public class DutyList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_list);
         ListView listview = findViewById(R.id.duty_list);
+        SharedPreferences preferences = this.getSharedPreferences("MyPref", 0);
+        SharedPreferences.Editor editor = preferences.edit();
         k = getIntent().getExtras();
         table_name = k.getString("table_name");
+        editor.putString("tableName", table_name);
+        editor.commit();
         database = new Mydb(this, table_name, null ,1);
         dutyList = database.dutylist();
         Custom_DutyList adapter = new Custom_DutyList(this,R.layout.custom_duty_list, dutyList);

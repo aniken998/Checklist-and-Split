@@ -61,7 +61,7 @@ public class Mydb extends SQLiteOpenHelper {
         cv.put("isCHECK", isCHECK);
         db = getWritableDatabase();
         db.insert(DUTY_TABLE_NAME, null, cv);
-        Toast.makeText(ctx, "Added " + title + " " + title + " " + executor, Toast.LENGTH_LONG).show();
+        Toast.makeText(ctx, "Added " + title + " " + isCHECK+ " " + executor, Toast.LENGTH_LONG).show();
     }
     public void big_list_delete(String title, String date) {
         db = getWritableDatabase();
@@ -83,7 +83,7 @@ public class Mydb extends SQLiteOpenHelper {
         return bigList;
     }
 
-    public ArrayList<Duty>  dutylist() {
+    public ArrayList<Duty> dutylist() {
         ArrayList<Duty> dutyList = new ArrayList<>();
         db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + DUTY_TABLE_NAME + ";", null);
