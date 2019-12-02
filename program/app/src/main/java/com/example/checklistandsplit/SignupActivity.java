@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    FirebaseDatabase database;
+    private FirebaseDatabase database;
     private DatabaseReference mReference;
     private static final String TAG = "EmailPassword";
 
@@ -49,7 +49,7 @@ public class SignupActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            User mUser = new User(user.getEmail());
+                            User mUser = new User(user.getEmail(), user.getUid());
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(user.getUid())
                                     .setValue(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {

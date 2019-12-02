@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 public class BigList  {
      private String title, date, time;
+     private int complete = 0;
+     private ArrayList<Duty> duties = new ArrayList<>();
     //int check;
+
+    public BigList() {
+    }
 
     public BigList(String title, String date, String time) {
         this.title = title;
@@ -36,4 +41,40 @@ public class BigList  {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public int getComplete() {
+        return complete;
+    }
+
+    public void setComplete(int complete) {
+        this.complete = complete;
+    }
+
+    public void addComplete() {
+        ++complete;
+    }
+
+    public void minusComplete() {
+        --complete;
+    }
+
+    public boolean isCompleted() {
+        if(complete == duties.size() && complete != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Duty> getDuties() {
+        return duties;
+    }
+
+    public void setDuties(ArrayList<Duty> duties) {
+        this.duties = duties;
+    }
+
+    public void addDuty(Duty duty) {
+        duties.add(duty);
+    }
+
 }

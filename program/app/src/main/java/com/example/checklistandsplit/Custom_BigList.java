@@ -18,7 +18,6 @@ public class Custom_BigList extends ArrayAdapter<BigList> {
     List<BigList> bigLists;
     Context context;
     int resource;
-    Mydb database;
     public Custom_BigList(@NonNull Context context, int resource, List<BigList> bigLists) {
         super(context, resource, bigLists);
         this.context = context;
@@ -42,7 +41,9 @@ public class Custom_BigList extends ArrayAdapter<BigList> {
         tvTitle.setText(title);
         tvDate.setText(date);
         tvTime.setText(time);
+        isCheck.setChecked(getItem(position).isCompleted());
 
         return convertView;
     }
+
 }

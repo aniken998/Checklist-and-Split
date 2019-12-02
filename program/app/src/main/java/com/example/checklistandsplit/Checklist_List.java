@@ -14,48 +14,60 @@ import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Checklist_List extends AppCompatActivity {
-    List<BigList> bigLists;
-    Mydb big_database;
-    Mydb duty_database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checklist_list);
         final ListView listView = findViewById(R.id.checklist_list);
-        big_database = new Mydb(this,"big_list", null, 1);
-        bigLists = big_database.biglist();
-//        bigLists = new ArrayList<>();
-//        bigLists.add(new BigList("123", "456", "789"));
-        Log.d("bigList size", bigLists.size() + "");
-        Custom_BigList adapter = new Custom_BigList(this,R.layout.custom_big_list, bigLists);
-        listView.setAdapter(adapter);
+        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User mUser = dataSnapshot.getValue(User.class);
+                HashMap<String, BigList> hashList = mUser.getHost();
+                ArrayList<BigList> bigLists = new ArrayList<>(hashList.values());
+                Custom_BigList adapter = new Custom_BigList(Checklist_List.this, R.layout.custom_big_list, bigLists);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("get List", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
         //final Intent i = new Intent(this, DutyList.class);
         listView.setFocusable(false);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+                BigList thisList = (BigList) listView.getItemAtPosition(position);
+                String listName = thisList.getTitle();
                 Intent i = new Intent(getApplicationContext(), DutyList.class);
                     //Log.d("postion", "" + position);
-                String duty_base_name = "Duty" + position;
                 Bundle k = new Bundle();
-                k.putString("table_name", duty_base_name);
-                k.putInt("position", position);
+                k.putString("list_name", listName);
                 i.putExtras(k);
-                duty_database = new Mydb(getApplicationContext(), duty_base_name, null, 1);
-                Toast.makeText(getApplicationContext(), "onitem " + position + " table_name " + duty_base_name, Toast.LENGTH_LONG).show();
                 startActivity(i);
-
-
             }
         });
 
@@ -72,12 +84,26 @@ public class Checklist_List extends AppCompatActivity {
     }
 
     public void save(View view) {
-        EditText todo = findViewById(R.id.todo);
-        EditText date = findViewById(R.id.date);
-        EditText time = findViewById(R.id.time);
-        big_database = new Mydb(this,"big_list", null, 1);
-        big_database.big_list_insert(todo.getText().toString(), date.getText().toString(), time.getText().toString());
-        big_database.count();
+        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        final EditText todo = findViewById(R.id.todo);
+        final EditText date = findViewById(R.id.date);
+        final EditText time = findViewById(R.id.time);
+        mReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User mUser = (User) dataSnapshot.getValue(User.class);
+                mUser.addHostBiglist(todo.getText().toString(),
+                        new BigList(todo.getText().toString(), date.getText().toString(), time.getText().toString()));
+                writeNewPost(mUser);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Save Button", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
         Intent intent = getIntent();
         finish();
         startActivity(intent);
@@ -95,5 +121,15 @@ public class Checklist_List extends AppCompatActivity {
         addJob.setVisibility(View.INVISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         add.show();
+    }
+
+    public void writeNewPost(User user) {
+        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        String key = mReference.child("Users").child(user.getUid()).getKey();
+        Map<String, Object> postValues = user.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        childUpdates.put("/Users/" + key, postValues);
+        mReference.updateChildren(childUpdates);
     }
 }

@@ -8,37 +8,55 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DutyList extends AppCompatActivity {
-    Mydb database;
     List<Duty> dutyList;
     Bundle k;
-    String table_name;
+    private String thisListName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_list);
-        ListView listview = findViewById(R.id.duty_list);
-        SharedPreferences preferences = this.getSharedPreferences("MyPref", 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        k = getIntent().getExtras();
-        table_name = k.getString("table_name");
-        editor.putString("tableName", table_name);
-        editor.commit();
-        database = new Mydb(this, table_name, null ,1);
-        dutyList = database.dutylist();
-        Custom_DutyList adapter = new Custom_DutyList(this,R.layout.custom_duty_list, dutyList);
-        listview.setAdapter(adapter);
+        final ListView listview = findViewById(R.id.duty_list);
+        final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                k = getIntent().getExtras();
+                thisListName = k.getString("list_name");
+                User mUser = (User) dataSnapshot.getValue(User.class);
+                ArrayList<Duty> dutyList = mUser.getHost().get(thisListName).getDuties();
+                Custom_DutyList adapter = new Custom_DutyList(DutyList.this,R.layout.custom_duty_list, dutyList);
+                listview.setAdapter(adapter);
 
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Save Button", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
 
 
@@ -51,11 +69,27 @@ public class DutyList extends AppCompatActivity {
     }
 
     public void duty_save(View view) {
-        EditText title = findViewById(R.id.new_duty_list_title);
-        EditText executor = findViewById(R.id.new_duty_list_executor);
-        database = new Mydb(this,table_name, null, 1);
-        database.duty_list_insert(title.getText().toString(), executor.getText().toString(), false);
-        database.count();
+        final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        final EditText title = findViewById(R.id.new_duty_list_title);
+        final EditText executor = findViewById(R.id.new_duty_list_executor);
+        mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                k = getIntent().getExtras();
+                thisListName = k.getString("list_name");
+                User mUser = (User) dataSnapshot.getValue(User.class);
+                mUser.getHost().get(thisListName).addDuty(
+                        new Duty(0, title.getText().toString(),executor.getText().toString(), thisListName));
+                writeNewPost(mUser);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Save Button", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
         Intent intent = getIntent();
         finish();
         startActivity(intent);
@@ -71,5 +105,15 @@ public class DutyList extends AppCompatActivity {
         addDuty.setVisibility(View.INVISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
         add.show();
+    }
+
+    public void writeNewPost(User user) {
+        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        String key = mReference.child("Users").child(user.getUid()).getKey();
+        Map<String, Object> postValues = user.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        childUpdates.put("/Users/" + key, postValues);
+        mReference.updateChildren(childUpdates);
     }
 }
