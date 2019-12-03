@@ -18,10 +18,24 @@
         android:layout_alignRight="@+id/duty_list"
         app:srcCompat="@android:drawable/ic_input_add"/>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_member_floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="add_member_float_button"
+        android:layout_above="@+id/duty_floatingActionButton"
+        android:layout_alignRight="@+id/duty_list"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
     <ListView
         android:id="@+id/duty_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/add_duty"
@@ -83,5 +97,60 @@
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id = "@+id/add_member"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:cardCornerRadius="20dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <EditText
+            android:id = "@+id/member_email"
+            android:layout_width="210dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="40dp"
+            android:ems="10"
+            android:hint="email"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id = "@+id/current_mebmer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text = "text"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="451dp"
+            android:ems="10"/>
+        <Button
+            android:id = "@+id/add_member_button"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="310dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="275dp"
+            android:onClick="member_add_button"
+            android:text="Add" />
+        <Button
+            android:id = "@+id/add_member_back"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="Back"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="310dp"
+            android:layout_marginEnd="50dp"
+            android:onClick="member_back"
+            android:layout_marginBottom="275dp" />
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
