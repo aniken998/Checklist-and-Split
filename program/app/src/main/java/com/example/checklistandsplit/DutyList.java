@@ -37,6 +37,12 @@ public class DutyList extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_list);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         final ListView listview = findViewById(R.id.duty_list);
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
@@ -58,7 +64,6 @@ public class DutyList extends AppCompatActivity {
             }
         });
     }
-
 
     public void duty_float_button(View view) {
         CardView addDuty= (CardView) findViewById(R.id.add_duty);

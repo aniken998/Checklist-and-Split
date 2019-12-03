@@ -37,6 +37,11 @@ public class Checklist_List extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checklist_list);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         final ListView listView = findViewById(R.id.checklist_list);
         DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -63,16 +68,13 @@ public class Checklist_List extends AppCompatActivity {
                 BigList thisList = (BigList) listView.getItemAtPosition(position);
                 String listName = thisList.getTitle();
                 Intent i = new Intent(getApplicationContext(), DutyList.class);
-                    //Log.d("postion", "" + position);
+                //Log.d("postion", "" + position);
                 Bundle k = new Bundle();
                 k.putString("list_name", listName);
                 i.putExtras(k);
                 startActivity(i);
             }
         });
-
-
-
     }
 
     public void float_button(View view) {
