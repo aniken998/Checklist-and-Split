@@ -11,14 +11,12 @@
         android:id="@+id/Title"
         android:layout_width="419dp"
         android:layout_height="250dp"
-        android:layout_marginBottom="526dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="525dp"
+        android:background="@mipmap/title_check_1_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@mipmap/title_check_1_foreground"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"

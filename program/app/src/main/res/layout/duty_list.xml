@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:onClick="add_member_float_button"
+        android:layout_marginBottom="29dp"
         android:layout_above="@+id/duty_floatingActionButton"
         android:layout_alignRight="@+id/duty_list"
         app:srcCompat="@android:drawable/ic_menu_myplaces" />
