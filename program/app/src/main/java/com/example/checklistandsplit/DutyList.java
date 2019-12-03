@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,16 +36,19 @@ public class DutyList extends AppCompatActivity {
     List<Duty> dutyList;
     Bundle k;
     private String thisListName;
+    TextView current_member;
+    static String added_members;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_list);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        current_member = findViewById(R.id.current_mebmer);
+        current_member.setText(added_members);
         final ListView listview = findViewById(R.id.duty_list);
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
@@ -69,9 +75,29 @@ public class DutyList extends AppCompatActivity {
         CardView addDuty= (CardView) findViewById(R.id.add_duty);
         addDuty.setVisibility(View.VISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
+        FloatingActionButton member = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
         add.hide();
+        member.hide();
 
     }
+    public void add_member_float_button(View view) {
+        CardView addMember = (CardView)findViewById(R.id.add_member);
+        addMember.setVisibility(View.VISIBLE);
+        FloatingActionButton member = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
+        FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
+        member.hide();
+        add.hide();
+    }
+    public void member_add_button(View view) {
+        final EditText member = findViewById(R.id.member_email);
+        added_members += member.getText().toString() + " ,";
+        current_member.setText(added_members);
+        //firebase
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
 
     public void duty_save(View view) {
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
@@ -101,6 +127,18 @@ public class DutyList extends AppCompatActivity {
 
     }
 
+    public void member_back(View view) {
+        EditText member = findViewById(R.id.member_email);
+        member.getText().clear();
+        CardView addMember = (CardView) findViewById(R.id.add_member);
+        addMember.setVisibility(view.INVISIBLE);
+        FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
+        FloatingActionButton member_button = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
+        add.show();
+        member_button.show();
+
+    }
+
     public void duty_back(View view) {
         EditText todo = findViewById(R.id.new_duty_list_title);
         EditText date = findViewById(R.id.new_duty_list_executor);
@@ -109,7 +147,9 @@ public class DutyList extends AppCompatActivity {
         CardView addDuty = (CardView) findViewById(R.id.add_duty);
         addDuty.setVisibility(View.INVISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
+        FloatingActionButton member = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
         add.show();
+        member.show();
     }
 
     public void writeNewPost(User user) {
