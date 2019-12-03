@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_light_background">
+    android:background="@mipmap/list_paper_foreground">
 
     <CheckBox
         android:id="@+id/duty_list_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_weight="0"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="10"
+        android:scaleY="2"
+        android:scaleX="2"
         android:focusable="false" />
 
     <TextView
@@ -19,10 +23,13 @@
         android:textIsSelectable="false"
         android:layout_height="wrap_content"
         android:layout_weight="30"
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:text="TextView"
-        android:textSize="20dp"/>
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/duty_list_executor"
@@ -31,7 +38,19 @@
         android:layout_height="wrap_content"
         android:layout_weight="30"
         android:layout_gravity="center"
+        android:textColor="@color/black"
         android:textAlignment="center"
         android:text="TextView"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
+
+    <ImageButton
+        android:id="@+id/biglist_delete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="10"
+        android:layout_gravity="center"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        app:srcCompat="@android:drawable/ic_delete"/>
+
 </LinearLayout>
