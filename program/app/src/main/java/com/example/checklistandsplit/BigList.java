@@ -6,10 +6,18 @@ public class BigList  {
      private String title, date, time;
      private int complete = 0;
      private ArrayList<Duty> duties = new ArrayList<>();
-     private ArrayList<String> members = new ArrayList<>();
+     private String host;
     //int check;
 
     public BigList() {
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public BigList(String title, String date, String time, String host) {
@@ -17,7 +25,7 @@ public class BigList  {
         //this.check = check;
         this.date = date;
         this.time = time;
-        members.add(host);
+        this.host = host;
     }
 
     public String getTitle(){

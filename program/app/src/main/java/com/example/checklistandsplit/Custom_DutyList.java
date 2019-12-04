@@ -34,11 +34,13 @@ public class Custom_DutyList extends ArrayAdapter<Duty> {
     int resource;
     Duty thisDuty;
     CheckBox isCheck;
-    public Custom_DutyList(@NonNull Context context, int resource, List<Duty> dutyList) {
+    String hostID;
+    public Custom_DutyList(@NonNull Context context, int resource, List<Duty> dutyList, String hostID) {
         super(context, resource, dutyList);
         this.context = context;
         this.resource = resource;
         this.dutyList = dutyList;
+        this.hostID = hostID;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -80,8 +82,7 @@ public class Custom_DutyList extends ArrayAdapter<Duty> {
     public void updateCheck(final int position) {
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-
-        mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mReference.child("Users").child(hostID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User mUser = (User) dataSnapshot.getValue(User.class);

@@ -11,7 +11,9 @@ import java.util.Map;
 public class User {
     private String email, uid;
     private HashMap<String, BigList> host = new HashMap<>();
-    private ArrayList<Pair> collaborator = new ArrayList<>();
+    private ArrayList<String> collaborator_host = new ArrayList<>();
+    private ArrayList<String> collaborator_list = new ArrayList<>();
+
     public User() {
 
     }
@@ -33,18 +35,33 @@ public class User {
         return host;
     }
 
-
     public void setHost(HashMap<String, BigList> host) {
         this.host = host;
     }
 
+    public ArrayList<String> getCollaborator_host() {
+        return collaborator_host;
+    }
+
+    public void setCollaborator_host(ArrayList<String> collaborator_host) {
+        this.collaborator_host = collaborator_host;
+    }
+
+    public ArrayList<String> getCollaborator_list() {
+        return collaborator_list;
+    }
+
+    public void setCollaborator_list(ArrayList<String> collaborator_list) {
+        this.collaborator_list = collaborator_list;
+    }
 
     public void addHostBiglist(String name, BigList bigList) {
         host.put(name, bigList);
     }
 
-    public void addCollaborator(Pair list) {
-        collaborator.add(list);
+    public void addCollaborator(String name, String list) {
+        collaborator_host.add(name);
+        collaborator_list.add(list);
     }
 
     public String getUid() {
@@ -61,7 +78,8 @@ public class User {
         result.put("email", email);
         result.put("uid",uid);
         result.put("host",host);
-        result.put("collaborator", collaborator);
+        result.put("collaborator_host", collaborator_host);
+        result.put("collaborator_list", collaborator_list);
         return result;
     }
 }

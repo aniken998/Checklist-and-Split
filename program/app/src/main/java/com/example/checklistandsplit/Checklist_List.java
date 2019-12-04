@@ -1,22 +1,17 @@
 package com.example.checklistandsplit;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.util.Pair;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,10 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Checklist_List extends AppCompatActivity {
+    private static final String TAG = "Checklist_List";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +38,39 @@ public class Checklist_List extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         final ListView listView = findViewById(R.id.checklist_list);
-        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        mReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+        final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Log.d(TAG, dataSnapshot.getValue(User.class).toString());
                 User mUser = dataSnapshot.getValue(User.class);
                 HashMap<String, BigList> hashList = mUser.getHost();
-                ArrayList<BigList> bigLists = new ArrayList<>(hashList.values());
-                Custom_BigList adapter = new Custom_BigList(Checklist_List.this, R.layout.custom_big_list, bigLists);
-                listView.setAdapter(adapter);
+                final ArrayList<BigList> bigLists = new ArrayList<>(hashList.values());
+                for(int i = 0; i < mUser.getCollaborator_list().size(); i++) {
+                    final String listUser = mUser.getCollaborator_host().get(i);
+                    final String listName = mUser.getCollaborator_list().get(i);
+                    mReference.child("Users").child(listUser).child("host").child(listName).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            BigList list = dataSnapshot.getValue(BigList.class);
+                            Log.d(TAG, list.toString());
+                            bigLists.add(list);
+                            Log.d(TAG, "Inner Size: " + bigLists.size());
+                            Custom_BigList adapter = new Custom_BigList(Checklist_List.this, R.layout.custom_big_list, bigLists);
+                            listView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                if(mUser.getCollaborator_list().size() <= 0) {
+                    Custom_BigList adapter = new Custom_BigList(Checklist_List.this, R.layout.custom_big_list, bigLists);
+                    listView.setAdapter(adapter);
+                }
             }
 
             @Override
@@ -71,6 +89,8 @@ public class Checklist_List extends AppCompatActivity {
                 //Log.d("postion", "" + position);
                 Bundle k = new Bundle();
                 k.putString("list_name", listName);
+                k.putBoolean("isHost",thisList.getHost() == user.getUid());
+                k.putString("hostID", thisList.getHost());
                 i.putExtras(k);
                 startActivity(i);
             }
@@ -97,7 +117,7 @@ public class Checklist_List extends AppCompatActivity {
                 User mUser = (User) dataSnapshot.getValue(User.class);
                 mUser.addHostBiglist(todo.getText().toString(),
                         new BigList(todo.getText().toString(), date.getText().toString(), time.getText().toString(),
-                                    user.getEmail()));
+                                    user.getUid()));
                 writeNewPost(mUser);
 
             }
