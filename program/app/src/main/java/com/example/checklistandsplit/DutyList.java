@@ -39,11 +39,6 @@ public class DutyList extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_list);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         current_member = findViewById(R.id.current_mebmer);
         current_member.setText(added_members);
         final ListView listview = findViewById(R.id.duty_list);

@@ -32,11 +32,7 @@ public class Checklist_List extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checklist_list);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         final ListView listView = findViewById(R.id.checklist_list);
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -95,6 +91,7 @@ public class Checklist_List extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
 
     public void float_button(View view) {
@@ -111,7 +108,7 @@ public class Checklist_List extends AppCompatActivity {
         final EditText todo = findViewById(R.id.todo);
         final EditText date = findViewById(R.id.date);
         final EditText time = findViewById(R.id.time);
-        mReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+        mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User mUser = (User) dataSnapshot.getValue(User.class);
@@ -130,7 +127,6 @@ public class Checklist_List extends AppCompatActivity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
-
     }
 
     public void back(View view) {
