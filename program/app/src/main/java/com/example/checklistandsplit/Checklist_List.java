@@ -102,6 +102,11 @@ public class Checklist_List extends AppCompatActivity {
 
     }
 
+    public void refresh(View view) {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
     public void save(View view) {
         DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();

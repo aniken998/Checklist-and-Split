@@ -105,7 +105,16 @@
         android:layout_alignBottom="@+id/checklist_list"
         android:layout_alignRight="@+id/checklist_list"
         app:srcCompat="@android:drawable/ic_input_add"/>
-    
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/refrash_floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/floatingActionButton"
+        android:layout_alignBottom="@id/checklist_list"
+        android:clickable="true"
+        android:onClick="refresh"
+        app:srcCompat="@android:drawable/ic_menu_rotate" />
 
 
 </RelativeLayout>
