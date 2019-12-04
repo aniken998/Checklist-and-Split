@@ -121,7 +121,7 @@ public class DutyList extends AppCompatActivity {
                             k = getIntent().getExtras();
                             thisListName = k.getString("list_name");
                             User mUser = (User) dataSnapshot.getValue(User.class);
-                            mUser.addCollaborator(user.getUid(), thisListName);
+                            mUser.addCollaborator(k.getString("hostID"), thisListName);
                             writeNewPost(mUser);
                             Toast.makeText(DutyList.this, "Add Scuess", Toast.LENGTH_LONG).show();
                         }
