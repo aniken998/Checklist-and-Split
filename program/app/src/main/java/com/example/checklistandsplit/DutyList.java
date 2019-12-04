@@ -110,11 +110,10 @@ public class DutyList extends AppCompatActivity {
                             k = getIntent().getExtras();
                             thisListName = k.getString("list_name");
                             User mUser = (User) dataSnapshot.getValue(User.class);
-                            mUser.addCollaborator(new Pair(user.getEmail(), thisListName));
+                            mUser.addCollaborator(new Pair(user.getUid(), thisListName));
                             writeNewPost(mUser);
                             Toast.makeText(DutyList.this, "Add Scuess", Toast.LENGTH_LONG).show();
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Toast.makeText(DutyList.this, "Error-1", Toast.LENGTH_LONG).show();
