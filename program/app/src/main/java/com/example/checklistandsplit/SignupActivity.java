@@ -50,6 +50,9 @@ public class SignupActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             User mUser = new User(user.getEmail(), user.getUid());
+                            FirebaseDatabase.getInstance().getReference("Users-info")
+                                    .child(user.getEmail().substring(0, user.getEmail().indexOf("@")))
+                                    .setValue(user.getUid());
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(user.getUid())
                                     .setValue(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {

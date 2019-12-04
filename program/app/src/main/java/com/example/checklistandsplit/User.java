@@ -1,6 +1,6 @@
 package com.example.checklistandsplit;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.google.firebase.database.Exclude;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 public class User {
     private String email, uid;
     private HashMap<String, BigList> host = new HashMap<>();
-
+    private ArrayList<Pair> collaborator = new ArrayList<>();
     public User() {
 
     }
@@ -43,6 +43,10 @@ public class User {
         host.put(name, bigList);
     }
 
+    public void addCollaborator(Pair list) {
+        collaborator.add(list);
+    }
+
     public String getUid() {
         return uid;
     }
@@ -57,7 +61,7 @@ public class User {
         result.put("email", email);
         result.put("uid",uid);
         result.put("host",host);
-
+        result.put("collaborator", collaborator);
         return result;
     }
 }

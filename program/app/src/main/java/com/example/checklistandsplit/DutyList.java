@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.util.Pair;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,9 +91,47 @@ public class DutyList extends AppCompatActivity {
     }
     public void member_add_button(View view) {
         final EditText member = findViewById(R.id.member_email);
+        if(member.getText().toString().indexOf("@") < 0) {
+            Toast.makeText(DutyList.this, "Not an Email", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String username = member.getText().toString().substring(0, member.getText().toString().indexOf("@"));
+        mReference.child("Users-info").child(username).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String newUser = dataSnapshot.getValue(String.class);
+                //Toast.makeText(DutyList.this, newUser, Toast.LENGTH_LONG).show();
+                if(newUser != null) {
+                    mReference.child("Users").child(newUser).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            k = getIntent().getExtras();
+                            thisListName = k.getString("list_name");
+                            User mUser = (User) dataSnapshot.getValue(User.class);
+                            mUser.addCollaborator(new Pair(user.getEmail(), thisListName));
+                            writeNewPost(mUser);
+                            Toast.makeText(DutyList.this, "Add Scuess", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(DutyList.this, "Error-1", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(DutyList.this, "No Such User", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(DutyList.this, "Error-2", Toast.LENGTH_LONG).show();
+            }
+        });
         added_members += member.getText().toString() + " ,";
         current_member.setText(added_members);
-        //firebase
         Intent intent = getIntent();
         finish();
         startActivity(intent);

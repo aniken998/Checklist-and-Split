@@ -96,7 +96,8 @@ public class Checklist_List extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User mUser = (User) dataSnapshot.getValue(User.class);
                 mUser.addHostBiglist(todo.getText().toString(),
-                        new BigList(todo.getText().toString(), date.getText().toString(), time.getText().toString()));
+                        new BigList(todo.getText().toString(), date.getText().toString(), time.getText().toString(),
+                                    user.getEmail()));
                 writeNewPost(mUser);
 
             }
