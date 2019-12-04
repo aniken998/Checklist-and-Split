@@ -2,12 +2,17 @@ package com.example.checklistandsplit;
 
 public class Duty {
     private String title, executor;
-    private boolean isCheck;
+    private int isCheck;
+    private String parent;
+    public Duty() {
 
-    public Duty(boolean isCheck, String title, String executor) {
+    }
+
+    public Duty(int isCheck, String title, String executor, String parent) {
         this.title = title;
         this.executor = executor;
         this.isCheck = isCheck;
+        this.parent = parent;
     }
 
     public void setTitle(String title) {
@@ -26,12 +31,29 @@ public class Duty {
         return executor;
     }
 
-    public void setCheck(boolean isCheck) {
-        this.isCheck = isCheck;
-    }
 
-    public boolean getCheck() {
+    public int getIsCheck() {
         return isCheck;
     }
 
+    public void setIsCheck(int isCheck) {
+        this.isCheck = isCheck;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public boolean isChecked() {
+        if(isCheck == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }
