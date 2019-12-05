@@ -100,6 +100,11 @@ public class DutyList extends AppCompatActivity {
         member.hide();
         add.hide();
     }
+    public void duty_refresh(View view) {
+        Intent i = getIntent();
+        finish();
+        startActivity(i);
+    }
     public void member_add_button(View view) {
         final EditText member = findViewById(R.id.member_email);
         if(member.getText().toString().indexOf("@") < 0) {
