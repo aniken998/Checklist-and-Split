@@ -98,6 +98,8 @@ public class Checklist_List extends AppCompatActivity {
         CardView addJob = (CardView) findViewById(R.id.add_job);
         addJob.setVisibility(View.VISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        FloatingActionButton refresh = (FloatingActionButton) findViewById(R.id.refrash_floatingActionButton);
+        refresh.hide();
         add.hide();
 
     }
@@ -144,6 +146,8 @@ public class Checklist_List extends AppCompatActivity {
         CardView addJob = (CardView) findViewById(R.id.add_job);
         addJob.setVisibility(View.INVISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        FloatingActionButton refresh = (FloatingActionButton) findViewById(R.id.refrash_floatingActionButton);
+        refresh.show();
         add.show();
     }
 

@@ -42,7 +42,7 @@
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="40dp"
             android:ems="10"
-            android:hint="To-do"
+            android:hint="Title"
             android:inputType="textPersonName" />
 
         <EditText
@@ -55,7 +55,7 @@
             android:layout_marginBottom="451dp"
             android:ems="10"
             android:inputType="date"
-            android:hint="date:MM/DD/YYYY"/>
+            android:hint="Date: MM/DD/YYYY"/>
 
         <EditText
             android:id="@+id/time"
@@ -67,7 +67,7 @@
             android:layout_marginBottom="343dp"
             android:ems="10"
             android:inputType="time"
-            android:hint="time"/>
+            android:hint="Time"/>
 
         <Button
             android:id="@+id/done"
