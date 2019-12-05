@@ -7,7 +7,16 @@ public class BigList  {
      private int complete = 0;
      private ArrayList<Duty> duties = new ArrayList<>();
      private String host;
-    //int check;
+     private ArrayList<String> collaborators = new ArrayList<>();
+
+    public ArrayList<String> getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(ArrayList<String> collaborators) {
+        this.collaborators = collaborators;
+    }
+//int check;
 
     public BigList() {
     }
@@ -66,6 +75,10 @@ public class BigList  {
 
     public void minusComplete() {
         --complete;
+    }
+
+    public void addCollaborators(String name) {
+        collaborators.add(name);
     }
 
     public boolean isCompleted() {

@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DutyList extends AppCompatActivity {
+    private static final String TAG = "DutyList";
     List<Duty> dutyList;
     Bundle k;
     private String thisListName;
@@ -98,22 +99,51 @@ public class DutyList extends AppCompatActivity {
         mReference.child("Users-info").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String newUser = dataSnapshot.getValue(String.class);
+                final String newUser = dataSnapshot.getValue(String.class);
                 //Toast.makeText(DutyList.this, newUser, Toast.LENGTH_LONG).show();
                 if(newUser != null) {
-                    mReference.child("Users").child(newUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                    mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             k = getIntent().getExtras();
                             thisListName = k.getString("list_name");
                             User mUser = (User) dataSnapshot.getValue(User.class);
-                            mUser.addCollaborator(k.getString("hostID"), thisListName);
-                            writeNewPost(mUser);
-                            Toast.makeText(DutyList.this, "Add Scuess", Toast.LENGTH_LONG).show();
+                            boolean userNotExist = true;
+                            Log.d(TAG, mUser.getHost().get(thisListName).getCollaborators().toString());
+                            for(String s: mUser.getHost().get(thisListName).getCollaborators()) {
+                                Log.d(TAG, s + ": " + newUser + " is " + s.compareTo(newUser));
+                                if(s.compareTo(newUser) == 0) {
+                                    Log.d(TAG, s + ": " + newUser);
+                                    userNotExist = false;
+                                }
+                            }
+                            if(userNotExist) {
+                                mUser.getHost().get(thisListName).addCollaborators(newUser);
+                                writeNewPost(mUser);
+                                mReference.child("Users").child(newUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        k = getIntent().getExtras();
+                                        thisListName = k.getString("list_name");
+                                        User mUser = (User) dataSnapshot.getValue(User.class);
+                                        mUser.addCollaborator(k.getString("hostID"), thisListName);
+                                        writeNewPost(mUser);
+                                        Toast.makeText(DutyList.this, "Add Scuess", Toast.LENGTH_LONG).show();
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        Toast.makeText(DutyList.this, "Error-1", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                            else {
+                                Toast.makeText(DutyList.this, "User Already Exist", Toast.LENGTH_LONG).show();
+                            }
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(DutyList.this, "Error-1", Toast.LENGTH_LONG).show();
+
                         }
                     });
                 } else {
@@ -126,8 +156,6 @@ public class DutyList extends AppCompatActivity {
                 Toast.makeText(DutyList.this, "Error-2", Toast.LENGTH_LONG).show();
             }
         });
-        added_members += member.getText().toString() + " ,";
-        current_member.setText(added_members);
         Intent intent = getIntent();
         finish();
         startActivity(intent);
