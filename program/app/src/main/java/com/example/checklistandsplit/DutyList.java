@@ -153,7 +153,7 @@ public class DutyList extends AppCompatActivity {
         final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         final EditText title = findViewById(R.id.new_duty_list_title);
         final EditText executor = findViewById(R.id.new_duty_list_executor);
-        mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mReference.child("Users").child(k.getString("hostID")).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 k = getIntent().getExtras();
