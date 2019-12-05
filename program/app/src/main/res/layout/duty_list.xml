@@ -8,6 +8,16 @@
     android:background="@mipmap/background_background">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/duty_refresh_floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_alignBottom="@+id/duty_list"
+        android:onClick="duty_refresh"
+        android:layout_above="@id/duty_floatingActionButton"
+        app:srcCompat="@android:drawable/ic_menu_rotate" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/duty_floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
