@@ -45,42 +45,23 @@ public class DutyList extends AppCompatActivity {
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         k = getIntent().getExtras();
-        if(k.getBoolean("isHost")) {
-            mReference.child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    k = getIntent().getExtras();
-                    thisListName = k.getString("list_name");
-                    User mUser = (User) dataSnapshot.getValue(User.class);
-                    ArrayList<Duty> dutyList = mUser.getHost().get(thisListName).getDuties();
-                    Custom_DutyList adapter = new Custom_DutyList(DutyList.this, R.layout.custom_duty_list, dutyList,k.getString("hostID"));
-                    listview.setAdapter(adapter);
+        mReference.child("Users").child(k.getString("hostID")).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                k = getIntent().getExtras();
+                thisListName = k.getString("list_name");
+                User mUser = (User) dataSnapshot.getValue(User.class);
+                ArrayList<Duty> dutyList = mUser.getHost().get(thisListName).getDuties();
+                Custom_DutyList adapter = new Custom_DutyList(DutyList.this, R.layout.custom_duty_list, dutyList,k.getString("hostID"));
+                listview.setAdapter(adapter);
 
-                }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.w("Save Button", "loadPost:onCancelled", databaseError.toException());
-                }
-            });
-        } else {
-            mReference.child("Users").child(k.getString("hostID")).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    k = getIntent().getExtras();
-                    thisListName = k.getString("list_name");
-                    User mUser = (User) dataSnapshot.getValue(User.class);
-                    ArrayList<Duty> dutyList = mUser.getHost().get(thisListName).getDuties();
-                    Custom_DutyList adapter = new Custom_DutyList(DutyList.this, R.layout.custom_duty_list, dutyList, k.getString("hostID"));
-                    listview.setAdapter(adapter);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.w("Save Button", "loadPost:onCancelled", databaseError.toException());
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Save Button", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     public void duty_float_button(View view) {
