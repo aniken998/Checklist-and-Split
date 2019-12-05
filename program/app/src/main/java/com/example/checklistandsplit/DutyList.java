@@ -70,6 +70,8 @@ public class DutyList extends AppCompatActivity {
         addDuty.setVisibility(View.VISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
         FloatingActionButton member = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
+        FloatingActionButton refresh = (FloatingActionButton) findViewById(R.id.duty_refresh_floatingActionButton);
+        refresh.hide();
         add.hide();
         member.hide();
 
@@ -79,6 +81,8 @@ public class DutyList extends AppCompatActivity {
         addMember.setVisibility(View.VISIBLE);
         FloatingActionButton member = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
+        FloatingActionButton refresh = (FloatingActionButton) findViewById(R.id.duty_refresh_floatingActionButton);
+        refresh.hide();
         member.hide();
         add.hide();
     }
@@ -197,6 +201,8 @@ public class DutyList extends AppCompatActivity {
         addMember.setVisibility(view.INVISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
         FloatingActionButton member_button = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
+        FloatingActionButton refresh = (FloatingActionButton) findViewById(R.id.duty_refresh_floatingActionButton);
+        refresh.show();
         add.show();
         member_button.show();
 
@@ -211,6 +217,8 @@ public class DutyList extends AppCompatActivity {
         addDuty.setVisibility(View.INVISIBLE);
         FloatingActionButton add = (FloatingActionButton) findViewById(R.id.duty_floatingActionButton);
         FloatingActionButton member = (FloatingActionButton) findViewById(R.id.add_member_floatingActionButton);
+        FloatingActionButton refresh = (FloatingActionButton) findViewById(R.id.duty_refresh_floatingActionButton);
+        refresh.show();
         add.show();
         member.show();
     }
