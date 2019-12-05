@@ -8,14 +8,14 @@
 
     <CheckBox
         android:id="@+id/duty_list_checkBox"
-        android:layout_width="wrap_content"
+        android:layout_width="13dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="30dp"
         android:layout_weight="10"
-        android:scaleY="2"
+        android:focusable="false"
         android:scaleX="2"
-        android:focusable="false" />
+        android:scaleY="2" />
 
     <TextView
         android:id="@+id/duty_list_title"
@@ -29,7 +29,7 @@
         android:text="TextView"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/duty_list_executor"
@@ -41,16 +41,7 @@
         android:textColor="@color/black"
         android:textAlignment="center"
         android:text="TextView"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
-    <ImageButton
-        android:id="@+id/biglist_delete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_weight="10"
-        android:layout_gravity="center"
-        android:focusable="false"
-        android:focusableInTouchMode="true"
-        app:srcCompat="@android:drawable/ic_delete"/>
 
 </LinearLayout>
