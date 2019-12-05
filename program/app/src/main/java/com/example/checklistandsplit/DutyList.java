@@ -107,13 +107,13 @@ public class DutyList extends AppCompatActivity {
     }
     public void member_add_button(View view) {
         final EditText member = findViewById(R.id.member_email);
-        if(member.getText().toString().indexOf("@") < 0) {
+        if(member.getText().toString().indexOf(".") < 0) {
             Toast.makeText(DutyList.this, "Not an Email", Toast.LENGTH_LONG).show();
             return;
         }
         final DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String username = member.getText().toString().substring(0, member.getText().toString().indexOf("@"));
+        final String username = member.getText().toString().substring(0, member.getText().toString().indexOf("."));
         mReference.child("Users-info").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

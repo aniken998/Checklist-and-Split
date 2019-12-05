@@ -51,7 +51,7 @@ public class SignupActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             User mUser = new User(user.getEmail(), user.getUid());
                             FirebaseDatabase.getInstance().getReference("Users-info")
-                                    .child(user.getEmail().substring(0, user.getEmail().indexOf("@")))
+                                    .child(user.getEmail().substring(0, user.getEmail().indexOf(".")))
                                     .setValue(user.getUid());
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(user.getUid())
